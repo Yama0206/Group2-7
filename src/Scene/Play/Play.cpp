@@ -3,25 +3,30 @@
 //初期化処理
 void Play::Init()
 {
-	player.Init();			//プレイヤー関連			
+	//プレイヤー関連
+	player.Init();			
+	player.InitValue();
 }
 
 //読み込み処理
 void Play::Load()
 {
-	player.Load();			//プレイヤー関連
+	//プレイヤー関連
+	player.Load();			
 }
 
 //通常処理
 void Play::Step()
 {
-	player.Step();			//プレイヤー関連
+	//プレイヤー関連
+	player.Step();
 }
 
 //描画処理
 void Play::Draw()
 {
-	player.Draw();			//プレイヤー関連
+	//プレイヤー関連
+	player.Draw();			
 }
 
 //終了処理

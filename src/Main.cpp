@@ -53,9 +53,17 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		//画面に表示されたものを初期化
 		ClearDrawScreen();
 
-		//-----------------------------------------
-		//ここからゲームの本体を書くことになる
-		//-----------------------------------------
+		//フレームレート制御
+		FpsControll_Update();
+
+		//入力制御ステップ
+		StepInput();
+
+		//マウスカーソルの表示
+		SetMouseDispFlag(true);
+
+
+		//ゲームのシーン移動
 		switch (g_CurrentSceneID)
 		{
 		case SCENE_ID_INIT_TITLE:
@@ -68,6 +76,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		case SCENE_ID_FIN_TITLE:
 
 			break;
+
+
 		case SCENE_ID_INIT_PLAY:
 			
 			play.Init();		//初期化処理
@@ -84,6 +94,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		case SCENE_ID_FIN_PLAY:
 
 			break;
+
+
 		case SCENE_ID_INIT_RESULT:
 
 			break;
@@ -96,29 +108,26 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		}
 
 		// FPS初期化処理
-		void InitFPS();
+		InitFPS();
 
 		//FPS計算
-		void CalcFPS();
-
-		//FPS表示（デバッグ用）
-		void DrawFPS();
-
-		//現在の時間を設定
-		void SetNowTimeFps();
-
-		// 前回の実行から実行可能フレームかチェック
-		bool IsExecuteFPS();
+		CalcFPS();
 
 		// FPSの通常処理
-		void StepFPS();
+		StepFPS();
 
-		//フレーレートの制御
-		void FpsControll_Initialize();
+		//FPSの表示
+		DrawFPS();
 
-		//FPS制御
-		bool FpsControll_Update();
-		//-----------------------------------------
+		//現在の時間を設定
+		SetNowTimeFps();
+
+		// 前回の実行から実行可能フレームかチェック
+		IsExecuteFPS();
+
+		//待機
+		FpsControll_Wait();		
+	
 		//ループの終わりに
 		//フリップ関数
 		ScreenFlip();
