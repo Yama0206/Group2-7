@@ -1,5 +1,5 @@
 #include "DxLib.h"
-#include "Fps.h"
+#include "../Fps/Fps.h"
 #include <math.h>
 
 //フレームレート制御
