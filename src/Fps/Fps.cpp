@@ -57,7 +57,7 @@ void CalcFPS() {
 void DrawFPS()
 {
 	unsigned int color = GetColor(255, 30, 30);
-	//DrawFormatString(1100, 50, color, "FPS[%.2f]", frameRateInfo.fps);
+	DrawFormatString(1100, 50, color, "FPS[%.2f]", frameRateInfo.fps);
 }
 
 // 前回の実行から実行可能フレームかチェック

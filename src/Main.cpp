@@ -2,6 +2,8 @@
 
 #include "DxLib.h"	//DXライブラリのインクルード
 #include "Scene/Scene.h"
+#include "Scene/Play/Play.h"
+#include "Player/Player.h"
 #include "Fps/Fps.h"
 
 // define
@@ -27,7 +29,15 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	
 	//-----------------------------------------
 	//一番最初に１回だけやる処理をここに書く
+	
+	//Input関数の初期化
+	InitInput();
+	
+	//シーンクラス宣言
 	SCENE_ID g_CurrentSceneID = SCENE_ID_INIT_TITLE;
+	
+	//クラス宣言
+	Play play;			//プレイシーン
 
 	//-----------------------------------------
 
@@ -50,6 +60,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		{
 		case SCENE_ID_INIT_TITLE:
 
+			g_CurrentSceneID = SCENE_ID_INIT_PLAY;
 			break;
 		case SCENE_ID_LOOP_TITLE:
 
@@ -58,9 +69,16 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 			break;
 		case SCENE_ID_INIT_PLAY:
+			
+			play.Init();		//初期化処理
+			play.Load();		//読み込み処理
 
+			g_CurrentSceneID = SCENE_ID_LOOP_PLAY;
 			break;
 		case SCENE_ID_LOOP_PLAY:
+
+			play.Step();		//通常処理
+			play.Draw();		//描画処理
 
 			break;
 		case SCENE_ID_FIN_PLAY:
@@ -77,7 +95,29 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			break;
 		}
 
+		// FPS初期化処理
+		void InitFPS();
 
+		//FPS計算
+		void CalcFPS();
+
+		//FPS表示（デバッグ用）
+		void DrawFPS();
+
+		//現在の時間を設定
+		void SetNowTimeFps();
+
+		// 前回の実行から実行可能フレームかチェック
+		bool IsExecuteFPS();
+
+		// FPSの通常処理
+		void StepFPS();
+
+		//フレーレートの制御
+		void FpsControll_Initialize();
+
+		//FPS制御
+		bool FpsControll_Update();
 		//-----------------------------------------
 		//ループの終わりに
 		//フリップ関数
@@ -87,7 +127,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	//-----------------------------------------
 	//最後に１回だけやる処理をここに書く
-
+	
 
 	//-----------------------------------------
 	//DXライブラリの後処理
