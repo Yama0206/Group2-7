@@ -2,6 +2,7 @@
 
 #include "DxLib.h"	//DXライブラリのインクルード
 #include "Scene/Scene.h"
+#include "Fps/Fps.h"
 
 // define
 #define	SCREEN_SIZE_X	640	// X方向の画面サイズを指定
@@ -45,7 +46,36 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		//-----------------------------------------
 		//ここからゲームの本体を書くことになる
 		//-----------------------------------------
-		
+		switch (g_CurrentSceneID)
+		{
+		case SCENE_ID_INIT_TITLE:
+
+			break;
+		case SCENE_ID_LOOP_TITLE:
+
+			break;
+		case SCENE_ID_FIN_TITLE:
+
+			break;
+		case SCENE_ID_INIT_PLAY:
+
+			break;
+		case SCENE_ID_LOOP_PLAY:
+
+			break;
+		case SCENE_ID_FIN_PLAY:
+
+			break;
+		case SCENE_ID_INIT_RESULT:
+
+			break;
+		case SCENE_ID_LOOP_RESULT:
+
+			break;
+		case SCENE_ID_FIN_RESULT:
+
+			break;
+		}
 
 
 		//-----------------------------------------
