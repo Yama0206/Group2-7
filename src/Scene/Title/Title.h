@@ -17,6 +17,5 @@ public:
 
 	void FinTitle();   //ƒ^ƒCƒgƒ‹Œãˆ—
 
-
-	void DrawTitle();
+	void DrawTitle();  //•`‰æˆ—
 };
