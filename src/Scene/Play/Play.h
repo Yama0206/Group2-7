@@ -2,12 +2,17 @@
 #include "../../Player/Player.h"
 #include "../../Player/Bullet/Bullet.h"
 
+const float SHOT_INTERVAL = 5.0f;			//弾の発射感覚
+
+
 //プレイシーンクラス
 class Play
 {
 private:
 	Player player;
 	Bullet bullet[256];
+
+	float PlayerFramCnt;
 
 public:
 	//初期化
@@ -24,4 +29,7 @@ public:
 
 	//終了処理
 	void Fin();
+
+	//あとで使うかも
+	/*void ShotInterval();*/
 };
