@@ -25,6 +25,7 @@ void Title::StepTitle()
 void Title::FinTitle()
 {
 	g_CurrentSceneID = SCENE_ID_INIT_PLAY;
+
 	DeleteGraph(TitleHndl);
 }
 
