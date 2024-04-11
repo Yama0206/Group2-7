@@ -12,10 +12,6 @@ private:
 	float PosX, PosY;			//座標
 	float Speed;				//速さ
 	int ImageHandle;			//画像ハンドル
-	
-	//マウス関連(試しに)
-	int MousePosX, MousePosY;	//マウスの座標
-
 
 public:
 	//初期化
@@ -42,6 +38,6 @@ public:
 	//プレイヤーの座標取得
 	void GetPlayerPos(float* PosX, float* PosY);
 
-	//プレイヤーの打つときの方向
-	void ShotDir();
+	//プレイヤーが球を打ったかどうか
+	bool IsShot();
 };

@@ -40,8 +40,10 @@ void Player::Step()
 //描画処理
 void Player::Draw()
 {
-	//デバッグ用
-	DrawFormatString(32, 32, GetColor(255, 0, 0), "%f %f", PosX, PosY);
+	if (IsShot()) {
+		//デバッグ用
+		DrawFormatString(32, 32, GetColor(255, 0, 0), "押された");
+	}
 }
 
 //終了処理
@@ -78,13 +80,15 @@ void Player::Move()
 
 }
 
-//プレイヤーが球を打つ時の方向
-void Player::ShotDir()
+
+bool Player::IsShot()
 {
-	//マウスの座標を取得
-	GetMousePoint(&MousePosX, &MousePosY);
+	if (GetMouseInput() && MOUSE_INPUT_LEFT != 0)
+	{
+		return true;
+	}
 
-
+	return false;
 }
 
 //プレイヤーの座標
