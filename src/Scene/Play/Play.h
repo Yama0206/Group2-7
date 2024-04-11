@@ -1,11 +1,13 @@
 #pragma once
 #include "../../Player/Player.h"
+#include "../../Player/Bullet/Bullet.h"
 
 //プレイシーンクラス
 class Play
 {
 private:
 	Player player;
+	Bullet bullet[256];
 
 public:
 	//初期化

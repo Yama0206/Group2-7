@@ -26,7 +26,7 @@ void Play::Step()
 void Play::Draw()
 {
 	//プレイヤー関連
-	player.Draw();			
+	player.Draw();	
 }
 
 //終了処理
