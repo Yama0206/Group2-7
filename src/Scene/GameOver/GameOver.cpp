@@ -24,7 +24,7 @@ void GameOver::StepGameOver()
 
 void GameOver::FinGameOver()
 {
-	g_CurrentSceneID = SCENE_ID_INIT_GAMEOVER;
+	g_CurrentSceneID = SCENE_ID_INIT_TITLE;
 
 	DeleteGraph(GameOverHndl);
 }

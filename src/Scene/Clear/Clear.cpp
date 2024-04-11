@@ -24,7 +24,7 @@ void Clear::StepClear()
 
 void Clear::FinClear()
 {
-	g_CurrentSceneID = SCENE_ID_INIT_RESULT;
+	g_CurrentSceneID = SCENE_ID_INIT_TITLE;
 
 	DeleteGraph(ClearHndl);
 }
