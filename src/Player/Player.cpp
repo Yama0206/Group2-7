@@ -92,8 +92,7 @@ bool Player::IsShot()
 }
 
 //プレイヤーの座標
-void Player::GetPlayerPos(float* posX, float* posY)
+void Player::FramCnt(float* framcnt)
 {
-	posX = &PosX;
-	posY = &PosY;
+	*framcnt+=1;
 }

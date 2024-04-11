@@ -36,7 +36,11 @@ public:
 	void Move();
 
 	//プレイヤーの座標取得
-	void GetPlayerPos(float* PosX, float* PosY);
+	float GetPosX() { return PosX; }		//X座標
+	float GetPosY() { return PosY; }		//Y座標
+
+	//プレイヤーの座標取得
+	void FramCnt(float* framcnt);
 
 	//プレイヤーが球を打ったかどうか
 	bool IsShot();
