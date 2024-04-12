@@ -4,10 +4,19 @@
 void Play::Init()
 {
 	//プレイヤー関連
-	player.Init();			
+	player.Init();
 	player.InitValue();
 
 	PlayerFramCnt = 0.0f;
+
+	MousePosX = 0.0f;		//マウスのX座標
+	MousePosY = 0.0f;		//マウスのY座標
+
+	//弾の初期化
+	for (int i = 0; i < BULLET_MAX_NUM; i++)
+	{
+		bullet[i].Init();
+	}
 
 	//敵関連
 	enemy.Init();
@@ -16,11 +25,12 @@ void Play::Init()
 //読み込み処理
 void Play::Load()
 {
-	//プレイヤー関連
-	player.Load();			
-
-	//敵関連
-	enemy.Load();
+	player.Load();				//プレイヤー関連
+	enemy.Load();				//敵関連
+	for (int i = 0; i < BULLET_MAX_NUM; i++)
+	{
+		bullet[i].Load();
+	}
 }
 
 //通常処理
@@ -31,6 +41,9 @@ void Play::Step()
 	//プレイヤーのフレームをカウント
 	player.FramCnt(&PlayerFramCnt);
 
+	//発射処理
+	BulletShot();
+
 	//敵関連
 	enemy.Step();
 }
@@ -40,6 +53,11 @@ void Play::Draw()
 {
 	//プレイヤー関連
 	player.Draw();	
+	for (int i = 0; i < BULLET_MAX_NUM; i++) {
+		//弾関連
+		bullet[i].Draw();
+	}
+	
 
 	//敵関連
 	enemy.Draw();
@@ -71,3 +89,32 @@ void Play::Fin()
 //		}
 //	}
 //}
+
+//発射処理
+void Play::BulletShot()
+{
+	//弾の数分for分を回す
+	for (int bulletIndex = 0; bulletIndex < BULLET_MAX_NUM; bulletIndex++)
+	{
+		//プレイヤーが弾を発射したかどうか
+		if (player.IsShot())
+		{
+			//マウスの座標を取得
+			GetMousePoint(&MousePosX, &MousePosY);
+
+			if (!bullet[bulletIndex].GetIsUse()) {
+				//発射したら弾の使用フラグをオンにする
+				bullet[bulletIndex].SetIsUse(player.IsShot());
+			}
+		}
+		//マウスの座標を保存
+		bullet[bulletIndex].SetMousePos((float)MousePosX, (float)MousePosY);
+		
+		//弾が使われているかどうか
+		if (bullet[bulletIndex].GetIsUse())
+		{
+			//使われていたら弾を移動させる
+			bullet[bulletIndex].Move(player.GetPosX(), player.GetPosY());
+		}
+	}
+}

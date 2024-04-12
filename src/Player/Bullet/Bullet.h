@@ -1,7 +1,8 @@
 #pragma once
 #include "DxLib.h"
+#include "math.h"
 
-const char BULLET_PATH[] = { "" };			//弾画像パス
+const char BULLET_PATH[] = { "data/Enemy/Waruo.png" };			//弾画像パス
 const int BULLET_MAX_NUM = 256;				//弾の最大数
 
 class Bullet
@@ -11,8 +12,8 @@ private:
 	int ImageHandle;		//画像ハンドル
 	bool IsUse;				//弾を使っているかどうか
 
-	//マウス関連(試しに)
-	int MousePosX, MousePosY;	//マウスの座標
+	//マウスの座標保存用変数
+	VECTOR MousePos = { 0.0f, 0.0f, 0.0f };
 
 public:
 	//初期化
@@ -34,8 +35,13 @@ public:
 	void Fin();
 
 	//弾の移動関数
-	void Move(float posX, float posY);
+	void Move(float x, float y);
 
 	//弾の使用フラグの設定
 	void SetIsUse(bool flag);
+
+	//弾を使っているかどうかフラグを取得
+	bool GetIsUse() { return IsUse; }
+
+	void SetMousePos(float posX, float posY);
 };

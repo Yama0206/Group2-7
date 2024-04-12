@@ -38,7 +38,9 @@ void Bullet::Step()
 //描画処理
 void Bullet::Draw()
 {
-
+	if (IsUse) {
+		DrawRotaGraph(PosX, PosY, 1.0f, 0.0f, ImageHandle, false, true);
+	}
 }
 
 //終了処理
@@ -48,15 +50,39 @@ void Bullet::Fin()
 }
 
 //弾の移動関数
-void Bullet::Move(float posX, float posY)
+void Bullet::Move(float x, float y)
 {
-	//マウスの座標を取得
-	GetMousePoint(&MousePosX, &MousePosY);
+	//X,Yベクトル
+	VECTOR vBulletPos = { 0.0f, 0.0f, 0.0f };
 
+	//二点間の距離
+	float TwoPoint = 0.0f;
+
+	
+
+	//X,Yベクトルを計算
+	vBulletPos.x = MousePos.x - x;
+	vBulletPos.y = MousePos.y - y;
+
+	//二点間の距離を取得
+	TwoPoint = (vBulletPos.x * vBulletPos.x) + (vBulletPos.y * vBulletPos.y);
+
+	//平方根を求める
+	TwoPoint = sqrtf(TwoPoint);
+
+	//正規化した値を足す
+	PosX += vBulletPos.x / TwoPoint;
+	PosY += vBulletPos.y / TwoPoint;
 
 }
 
 void Bullet::SetIsUse(bool flag)
 {
 	IsUse = flag;
+}
+
+void Bullet::SetMousePos(float posX, float posY)
+{
+	MousePos.x = posX;
+	MousePos.y = posY;
 }

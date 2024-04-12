@@ -9,6 +9,8 @@ void Player::Init()
 
 	Speed = 0.0f;
 
+	IsAllive = false;
+
 	//画像ハンドル
 	ImageHandle = -1;
 }
@@ -44,6 +46,8 @@ void Player::Draw()
 		//デバッグ用
 		DrawFormatString(32, 32, GetColor(255, 0, 0), "押された");
 	}
+
+	DrawRotaGraph(PosX, PosY, 1.0f, 0.0f, ImageHandle, false, true);
 }
 
 //終了処理
@@ -59,12 +63,12 @@ void Player::Move()
 	//上方向
 	if(IsKeyKeep(KEY_INPUT_W))
 	{
-		PosY += Speed;
+		PosY -= Speed;
 	}
 	//下方向
 	if (IsKeyKeep(KEY_INPUT_S))
 	{
-		PosY -= Speed;
+		PosY += Speed;
 	}
 	//右方向
 	if (IsKeyKeep(KEY_INPUT_D))

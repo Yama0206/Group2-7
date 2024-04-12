@@ -3,7 +3,7 @@
 #include "../Scene/Scene.h"
 #include "../Input/Input.h"
 
-const char PLAYER_PATH[] = { "" };
+const char PLAYER_PATH[] = { "data/Player/onepiece01_luffy.png" };
 
 //プレイヤークラス
 class Player
@@ -13,6 +13,7 @@ private:
 	float Speed;				//速さ
 	int ImageHandle;			//画像ハンドル
 
+	bool IsAllive;				//生きているかどうか
 public:
 	//初期化
 	void Init();

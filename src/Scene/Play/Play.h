@@ -15,6 +15,9 @@ private:
 	Enemy enemy;
 
 	float PlayerFramCnt;
+	
+	//マウス関連(試しに)
+	int MousePosX, MousePosY;	//マウスの座標
 
 public:
 	//初期化
@@ -34,4 +37,7 @@ public:
 
 	//あとで使うかも
 	/*void ShotInterval();*/
+
+	//発射処理
+	void BulletShot();
 };
