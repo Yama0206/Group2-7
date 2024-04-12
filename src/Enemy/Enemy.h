@@ -3,6 +3,7 @@
 
 #define ENEMY_PATH "Data/Enemy/Waruo.png"
 #define ENEMY_MAX_NUM (5)
+#define ENEMY_RADIUS (16)
 
 class Enemy
 {
@@ -13,6 +14,11 @@ private:
 	int EnemyImageHandle[ENEMY_MAX_NUM];
 	//生存フラグ
 	bool EnemyIsActive[ENEMY_MAX_NUM];
+
+	int EnemyMoveNumX[ENEMY_MAX_NUM],EnemyMoveNumY[ENEMY_MAX_NUM];
+
+	//座標が変更されるまでのカウント
+	int PosChangeCnt[ENEMY_MAX_NUM];
 
 public:
 	
