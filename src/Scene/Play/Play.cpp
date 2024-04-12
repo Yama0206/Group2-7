@@ -9,6 +9,8 @@ void Play::Init()
 
 	PlayerFramCnt = 0.0f;
 
+	//敵関連
+	enemy.Init();
 }
 
 //読み込み処理
@@ -16,6 +18,9 @@ void Play::Load()
 {
 	//プレイヤー関連
 	player.Load();			
+
+	//敵関連
+	enemy.Load();
 }
 
 //通常処理
@@ -25,6 +30,9 @@ void Play::Step()
 	player.Step();
 	//プレイヤーのフレームをカウント
 	player.FramCnt(&PlayerFramCnt);
+
+	//敵関連
+	enemy.Step();
 }
 
 //描画処理
@@ -33,6 +41,8 @@ void Play::Draw()
 	//プレイヤー関連
 	player.Draw();	
 
+	//敵関連
+	enemy.Draw();
 	//デバッグ
 	DrawFormatString(32, 100, GetColor(255, 0, 0), "%f", PlayerFramCnt);
 }

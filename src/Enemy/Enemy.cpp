@@ -5,8 +5,6 @@ void Enemy::Init()
 	
 	for (int i = 0; i < ENEMY_MAX_NUM; i++)
 	{
-		//“G‰æ‘œ‚Ì“Ç‚Ýž‚Ý
-		EnemyImageHandle[i] = LoadGraph(ENEMY_PATH);
 		//À•W
 		EnemyPosX[i] = GetRand(640);
 		EnemyPosY[i] = GetRand(480);
@@ -15,6 +13,15 @@ void Enemy::Init()
 	}
 
 
+}
+
+void Enemy::Load()
+{
+	for (int i = 0; i < ENEMY_MAX_NUM; i++)
+	{
+		//“G‰æ‘œ‚Ì“Ç‚Ýž‚Ý
+		EnemyImageHandle[i] = LoadGraph(ENEMY_PATH);
+	}
 }
 
 void Enemy::Step()

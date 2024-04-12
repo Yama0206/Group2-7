@@ -1,6 +1,7 @@
 #pragma once
 #include "../../Player/Player.h"
 #include "../../Player/Bullet/Bullet.h"
+#include "../../Enemy/Enemy.h"
 
 const float SHOT_INTERVAL = 5.0f;			//’e‚Ì”­ŽËŠ´Šo
 
@@ -11,6 +12,7 @@ class Play
 private:
 	Player player;
 	Bullet bullet[256];
+	Enemy enemy;
 
 	float PlayerFramCnt;
 
