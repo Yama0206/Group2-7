@@ -5,6 +5,9 @@
 const char BULLET_PATH[] = { "data/Enemy/Waruo.png" };			//弾画像パス
 const int BULLET_MAX_NUM = 256;				//弾の最大数
 
+//スピードの値
+const int SPEED_NUM = 30;
+
 class Bullet
 {
 private:
@@ -45,3 +48,5 @@ public:
 
 	void SetMousePos(float posX, float posY);
 };
+
+//extern Bullet PosX;

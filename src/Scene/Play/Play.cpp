@@ -121,5 +121,7 @@ void Play::BulletShot()
 			//Žg‚í‚ê‚Ä‚¢‚½‚ç’e‚ðˆÚ“®‚³‚¹‚é
 			bullet[bulletIndex].Move(player.GetPosX(), player.GetPosY());
 		}
+
+		
 	}
 }

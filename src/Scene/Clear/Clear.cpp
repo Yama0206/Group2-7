@@ -9,7 +9,7 @@ void Clear::DebugClear()
 
 void Clear::InitClear()
 {
-	ClearHndl = LoadGraph("data/sensya.png");
+	ClearHndl = LoadGraph("data/clearImage/gameclearimage.png");
 
 	g_CurrentSceneID = SCENE_ID_LOOP_RESULT;
 }

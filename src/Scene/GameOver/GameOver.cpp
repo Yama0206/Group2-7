@@ -9,7 +9,7 @@ void GameOver::DebugGameOver()
 
 void GameOver::InitGameOver()
 {
-	GameOverHndl = LoadGraph("data/sensya.png");
+	GameOverHndl = LoadGraph("data/gameoverImage/gameoverimage.png");
 
 	g_CurrentSceneID = SCENE_ID_LOOP_GAMEOVER;
 }

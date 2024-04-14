@@ -9,7 +9,7 @@ void Title::DebugTitle()
 
 void Title::InitTitle()
 {
-	TitleHndl = LoadGraph("data/sensya.png");
+	TitleHndl = LoadGraph("data/TitleImage/Title_Image.png");
 
 	g_CurrentSceneID = SCENE_ID_LOOP_TITLE;
 }

@@ -3,6 +3,7 @@
 //初期化
 void Bullet::Init()
 {
+	
 	//座標
 	PosX = 0.0f;		//X座標
 	PosY = 0.0f;		//Y座標
@@ -12,34 +13,50 @@ void Bullet::Init()
 
 	//フラグ
 	IsUse = false;		//弾を使っているかどうか
+	
 }
 
 //初期値設定
 void Bullet::DefaultValue()
 {
+	
 	//座標
 	PosX = 0.0f;		//X座標
 	PosY = 0.0f;		//Y座標
+	
 }
 
 //読み込み
 void Bullet::Load()
 {
 	
-	ImageHandle = LoadGraph(BULLET_PATH);
+		ImageHandle = LoadGraph(BULLET_PATH);
+	
 }
 
 //通常処理
 void Bullet::Step()
 {
-
+	
 }
 
 //描画処理
 void Bullet::Draw()
 {
-	if (IsUse) {
-		DrawRotaGraph(PosX, PosY, 1.0f, 0.0f, ImageHandle, false, true);
+	for (int i = 0; i < BULLET_MAX_NUM; i++)
+	{
+		if (IsUse) {
+			DrawRotaGraph(PosX, PosY, 1.0f, 0.0f, ImageHandle, false, true);
+		}
+	}
+		
+	if (PosX > 640+32 || PosX < 0-32 || PosY>480+32 || PosY < 0-32)
+	{
+		IsUse = false;
+
+		//画面外に出たら弾の発射位置に戻す
+		PosX = 0.0f;
+		PosY = 0.0f;
 	}
 }
 
@@ -70,15 +87,20 @@ void Bullet::Move(float x, float y)
 	//平方根を求める
 	TwoPoint = sqrtf(TwoPoint);
 
-	//正規化した値を足す
-	PosX += vBulletPos.x / TwoPoint;
-	PosY += vBulletPos.y / TwoPoint;
-
+	//↓このfor文を使うとなぜか素早さが上がる
+	for (int i = 0; i < SPEED_NUM; i++)
+	{
+		//正規化した値を足す
+		PosX += vBulletPos.x / TwoPoint;
+		PosY += vBulletPos.y / TwoPoint;
+	}
 }
 
 void Bullet::SetIsUse(bool flag)
 {
-	IsUse = flag;
+	
+		IsUse = flag;
+	
 }
 
 void Bullet::SetMousePos(float posX, float posY)
