@@ -27,9 +27,10 @@ void Play::Load()
 {
 	player.Load();				//プレイヤー関連
 	enemy.Load();				//敵関連
+	//弾の数文for文を回す
 	for (int i = 0; i < BULLET_MAX_NUM; i++)
 	{
-		bullet[i].Load();
+		bullet[i].Load();		//弾関連
 	}
 }
 
@@ -53,9 +54,11 @@ void Play::Draw()
 {
 	//プレイヤー関連
 	player.Draw();	
-	for (int i = 0; i < BULLET_MAX_NUM; i++) {
-		//弾関連
-		bullet[i].Draw();
+	for (int i = 0; i < BULLET_MAX_NUM; i++) {			//弾の数文for文を回す
+		if (bullet[i].GetIsUse()) {
+			//弾関連
+			bullet[i].Draw();
+		}
 	}
 	
 
@@ -96,23 +99,25 @@ void Play::BulletShot()
 	//弾の数分for分を回す
 	for (int bulletIndex = 0; bulletIndex < BULLET_MAX_NUM; bulletIndex++)
 	{
+
 		//プレイヤーが弾を発射したかどうか
 		if (player.IsShot())
 		{
-			//マウスの座標を取得
-			GetMousePoint(&MousePosX, &MousePosY);
-
 			if (!bullet[bulletIndex].GetIsUse()) {
+				//マウスの座標を取得
+				GetMousePoint(&MousePosX, &MousePosY);
+
 				//発射したら弾の使用フラグをオンにする
-				bullet[bulletIndex].SetIsUse(player.IsShot());
+				bullet[bulletIndex].SetIsUse(true);
 			}
 		}
-		//マウスの座標を保存
-		bullet[bulletIndex].SetMousePos((float)MousePosX, (float)MousePosY);
 		
 		//弾が使われているかどうか
 		if (bullet[bulletIndex].GetIsUse())
 		{
+			//マウスの座標を保存
+			bullet[bulletIndex].SetMousePos((float)MousePosX, (float)MousePosY);
+
 			//使われていたら弾を移動させる
 			bullet[bulletIndex].Move(player.GetPosX(), player.GetPosY());
 		}

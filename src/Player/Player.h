@@ -3,7 +3,7 @@
 #include "../Scene/Scene.h"
 #include "../Input/Input.h"
 
-const char PLAYER_PATH[] = { "data/Player/onepiece01_luffy.png" };
+const char PLAYER_PATH[] = { "data/Player/PlayerImage.png" };
 
 //プレイヤークラス
 class Player

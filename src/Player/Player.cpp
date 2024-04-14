@@ -23,7 +23,7 @@ void Player::InitValue()
 	PosY = 0.0f;
 
 	//‘¬‚³
-	Speed = 1.0f;
+	Speed = 2.0f;
 }
 
 //“Ç‚İ‚İˆ—
