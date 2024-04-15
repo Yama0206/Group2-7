@@ -5,7 +5,8 @@
 #include "../../Collision/Collision.h"
 
 const float SHOT_INTERVAL = 5.0f;			//弾の発射感覚
-
+const char SHOT_SE[] = { "data/Sound/ShotSE1.wav" };
+const char BGM[] = { "data/Sound/maou_bgm_cyber44.mp3" };
 
 //プレイシーンクラス
 class Play
@@ -21,7 +22,16 @@ private:
 	//マウス関連(試しに)
 	int MousePosX, MousePosY;	//マウスの座標
 
+	//プレイシーンの背景画像
 	int PlayImageHandle;
+
+	//制限時間カウント
+	int PlayFinFreamCnt;
+
+	//サウンド
+	int Bullet_SE;
+	int Bgm;
+
 public:
 	//初期化
 	void Init();
@@ -52,4 +62,7 @@ public:
 
 	//無敵フラグ解除処理
 	void PlayerIsInv();
+
+	//敵の再出現処理
+	void RespawnEnemy();
 };

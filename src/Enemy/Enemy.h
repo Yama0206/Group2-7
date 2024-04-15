@@ -9,8 +9,6 @@ const float ENEMY_SIZE = 32.0f;
 class Enemy
 {
 private:
-
-
 	//画像ハンドル
 	int EnemyImageHandle[ENEMY_MAX_NUM];
 	//生存フラグ
@@ -32,5 +30,17 @@ public:
 	void Load();
 	void Step();
 	void Draw();
+
+	//生きているかどうかのフラグ設定
+	void SetIsAllive(bool Isflag, int num);
+	//生きているかどうかのフラグを取得
+	bool GetIsAllive(int num) { return IsAllive[num]; }
+
+	//リスポーンカウント
+	void AddRespawnCnt() { respawnCnt++; }
+	//リスポーンカウントの設定
+	void SetRespawnCnt(int num) { respawnCnt = num; }
+	//リスポーンカウント取得
+	int  GetRespawnCnt() { return respawnCnt; }
 };
 

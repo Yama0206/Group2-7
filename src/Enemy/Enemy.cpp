@@ -36,7 +36,8 @@ void Enemy::Init()
 	EnemyPosX[4] = 640 - 16;
 	EnemyPosY[4] = 480 - 16;
 
-	
+	//リスポーンカウント
+	respawnCnt = 0;
 }
 
 void Enemy::Load()
@@ -199,15 +200,19 @@ void Enemy::Draw()
 			DrawRotaGraph(EnemyPosX[i] += EnemyMoveNumX[i], EnemyPosY[i] += EnemyMoveNumY[i], 1.0f, 0.0f, EnemyImageHandle[i], true);
 		}
 
-		/*if (!IsAllive[i])
-		{
-			respawnCnt++;
-			if (respawnCnt >= 100)
-			{
-				IsAllive[i] = true;
-				respawnCnt = 0;
-			}
-			int respawnCnt;
-		}*/
+		//if (!IsAllive[i])
+		//{
+		//	respawnCnt++;
+		//	if (respawnCnt >= 100)
+		//	{
+		//		IsAllive[i] = true;
+		//		respawnCnt = 0;
+		//	}
+		//}
 	}
+}
+
+void Enemy::SetIsAllive(bool IsFlag, int num)
+{
+	IsAllive[num] = IsFlag;
 }

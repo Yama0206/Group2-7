@@ -23,6 +23,11 @@ void Play::Init()
 
     //背景読み込み
 	PlayImageHandle = LoadGraph("data/PlayImage/BackGround.png");
+
+	PlayFinFreamCnt = 0;
+
+	Bullet_SE = -1;
+	Bgm = -1;
 }
 
 //読み込み処理
@@ -36,11 +41,19 @@ void Play::Load()
 		bullet[i].Load();		//弾関連
 	}
 
+	//発射音の読み込み
+	Bullet_SE = LoadSoundMem(SHOT_SE);
+	Bgm = LoadSoundMem(BGM);
+
+	PlaySoundMem(Bgm, DX_PLAYTYPE_LOOP);
+
 }
 
 //通常処理
 void Play::Step()
 {
+	PlayFinFreamCnt++;
+
 	//プレイヤー関連
 	player.Step();
 
@@ -53,7 +66,11 @@ void Play::Step()
 	//敵とプレイヤーの当たり判定
 	EnemyToPlayer();
 	
+	//無敵処理
 	PlayerIsInv();
+
+	//敵のリスポーン処理
+	RespawnEnemy();
 
 	//敵関連
 	enemy.Step();
@@ -107,6 +124,8 @@ void Play::BulletShot()
 				//マウスの座標を取得
 				GetMousePoint(&MousePosX, &MousePosY);
 
+				PlaySoundMem(Bullet_SE, DX_PLAYTYPE_BACK);
+
 				//発射したら弾の使用フラグをオンにする
 				bullet[bulletIndex].SetIsUse(true);
 
@@ -137,11 +156,13 @@ void Play::EnemyToBulletCollision()
 	for (int enemyIndex = 0; enemyIndex < ENEMY_MAX_NUM; enemyIndex++) {
 		//弾の数分をfor文を回す
 		for (int bulletIndex = 0; bulletIndex < BULLET_MAX_NUM; bulletIndex++) {
-			//当たった時
-			if (IsHitRect(bullet[bulletIndex].GetPosX(), bullet[bulletIndex].GetPosY(), BULLET_SIZE, BULLET_SIZE,
-				enemy.EnemyPosX[enemyIndex], enemy.EnemyPosY[enemyIndex], ENEMY_SIZE, ENEMY_SIZE))
-			{
-				enemy.IsAllive[enemyIndex] = false;
+			if (enemy.GetIsAllive(enemyIndex)) {
+				//当たった時
+				if (IsHitRect(bullet[bulletIndex].GetPosX(), bullet[bulletIndex].GetPosY(), BULLET_SIZE, BULLET_SIZE,
+					enemy.EnemyPosX[enemyIndex], enemy.EnemyPosY[enemyIndex], ENEMY_SIZE, ENEMY_SIZE))
+				{
+					enemy.IsAllive[enemyIndex] = false;
+				}
 			}
 		}
 	}
@@ -153,19 +174,21 @@ void Play::EnemyToPlayer()
 	//敵の数分for文を回す
 	for (int enemyIndex = 0; enemyIndex < ENEMY_MAX_NUM; enemyIndex++)
 	{
-		if (!player.GetIsInv() && !player.GetIsStartInv()) {
-			//敵とプレイヤーが当たった時
-			if (IsHitRect(player.GetPosX(), player.GetPosY(), PLAYER_SIZE, PLAYER_SIZE,
-				enemy.EnemyPosX[enemyIndex], enemy.EnemyPosY[enemyIndex], ENEMY_SIZE, ENEMY_SIZE))
-			{
-				player.SetIsInv(true);
-				//プレイヤーのHPを減らす
-				player.SetHP(-1);
-
-				//HPがゼロになった時
-				if (player.GetHP() == 0)
+		if (enemy.GetIsAllive(enemyIndex)) {
+			if (!player.GetIsInv() && !player.GetIsStartInv()) {
+				//敵とプレイヤーが当たった時
+				if (IsHitRect(player.GetPosX(), player.GetPosY(), PLAYER_SIZE, PLAYER_SIZE,
+					enemy.EnemyPosX[enemyIndex], enemy.EnemyPosY[enemyIndex], ENEMY_SIZE, ENEMY_SIZE))
 				{
-					player.SetIsAllive(false);
+					player.SetIsInv(true);
+					//プレイヤーのHPを減らす
+					player.SetHP(-1);
+
+					//HPがゼロになった時
+					if (player.GetHP() == 0)
+					{
+						player.SetIsAllive(false);
+					}
 				}
 			}
 		}
@@ -184,6 +207,26 @@ void Play::PlayerIsInv()
 			player.SetIsInv(false);
 
 			PlayerFramCnt = 0;
+		}
+	}
+}
+
+void Play::RespawnEnemy()
+{
+	for (int i = 0; i < ENEMY_MAX_NUM; i++)
+	{
+		if (enemy.GetIsAllive(i) == false)
+		{
+			//リスポーンカウントを加算
+			enemy.AddRespawnCnt();
+
+			//カウントが240になったらリスポーン
+			if (enemy.GetRespawnCnt() == 120)
+			{
+				enemy.SetIsAllive(true, i);
+
+				enemy.SetRespawnCnt(0);
+			}
 		}
 	}
 }
