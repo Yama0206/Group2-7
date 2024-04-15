@@ -46,7 +46,7 @@ void Bullet::Draw()
 	for (int i = 0; i < BULLET_MAX_NUM; i++)
 	{
 		if (IsUse) {
-			DrawRotaGraph(PosX, PosY, 1.0f, 0.0f, ImageHandle, false, true);
+			DrawRotaGraph(PosX, PosY, 1.0f, 0.0f, ImageHandle, true, false);
 		}
 	}
 		

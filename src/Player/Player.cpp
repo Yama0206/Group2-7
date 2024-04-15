@@ -47,7 +47,7 @@ void Player::Draw()
 		DrawFormatString(32, 32, GetColor(255, 0, 0), "‰Ÿ‚³‚ê‚½");
 	}
 
-	DrawRotaGraph(PosX, PosY, 1.0f, 0.0f, ImageHandle, false, true);
+	DrawRotaGraph(PosX, PosY, 1.0f, 0.0f, ImageHandle, true, false);
 }
 
 //I—¹ˆ—
