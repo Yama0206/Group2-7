@@ -15,9 +15,8 @@ private:
 	Bullet bullet[256];
 	Enemy enemy;
 
+	//プレイヤーフレームカウント
 	float PlayerFramCnt;
-	
-	float Startp;
 	
 	//マウス関連(試しに)
 	int MousePosX, MousePosY;	//マウスの座標

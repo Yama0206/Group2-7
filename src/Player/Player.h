@@ -16,6 +16,7 @@ private:
 	int HP;						//体力
 
 	bool IsInv;					//無敵フラグ
+	bool IsStartInv;			//スタートしてからの無敵フラグ
 	bool IsAllive;				//生きているかどうか
 public:
 	//初期化
@@ -52,6 +53,11 @@ public:
 	void SetIsInv(bool IsFlag) { IsInv = IsFlag; }
 	//無敵フラグを取得
 	bool GetIsInv() { return IsInv; }
+
+	//無敵フラグのセット
+	void SetIsStartInv(bool IsFlag) { IsStartInv = IsFlag; }
+	//無敵フラグを取得
+	bool GetIsStartInv() { return IsStartInv; }
 
 	//HPの値の変更
 	void SetHP(int hp) { HP += hp; }

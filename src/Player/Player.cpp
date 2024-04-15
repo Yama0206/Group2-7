@@ -13,6 +13,7 @@ void Player::Init()
 
 	IsAllive = true;
 	IsInv = false;
+	IsStartInv = true;
 
 	//‰æ‘œƒnƒ“ƒhƒ‹
 	ImageHandle = -1;

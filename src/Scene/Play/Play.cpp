@@ -20,6 +20,8 @@ void Play::Init()
 
 	//敵関連
 	enemy.Init();
+
+
 }
 
 //読み込み処理
@@ -32,6 +34,7 @@ void Play::Load()
 	{
 		bullet[i].Load();		//弾関連
 	}
+
 }
 
 //通常処理
@@ -81,24 +84,6 @@ void Play::Fin()
 
 }
 
-//発射間隔
-//void Play::ShotInterval()
-//{
-//	//発射するまでの時間
-//	if (PlayerFramCnt > SHOT_INTERVAL)
-//	{
-//		PlayerFramCnt = SHOT_INTERVAL;
-//	}
-//	//発射間隔と発射フラグがオンになったら発射
-//	if (player.IsShot() && PlayerFramCnt == SHOT_INTERVAL)
-//	{
-//		//弾の情報処理
-//		for (int BulletIndex = 0; BulletIndex < BULLET_MAX_NUM; BulletIndex++)
-//		{
-//
-//		}
-//	}
-//}
 
 //発射処理
 void Play::BulletShot()
@@ -110,6 +95,9 @@ void Play::BulletShot()
 		//プレイヤーが弾を発射したかどうか
 		if (player.IsShot())
 		{
+			//クリックしたら無敵を解除
+			player.SetIsStartInv(false);
+
 			if (!bullet[bulletIndex].GetIsUse()) {
 				//マウスの座標を取得
 				GetMousePoint(&MousePosX, &MousePosY);
@@ -160,7 +148,7 @@ void Play::EnemyToPlayer()
 	//敵の数分for文を回す
 	for (int enemyIndex = 0; enemyIndex < ENEMY_MAX_NUM; enemyIndex++)
 	{
-		if (!player.GetIsInv()) {
+		if (!player.GetIsInv() && !player.GetIsStartInv()) {
 			//敵とプレイヤーが当たった時
 			if (IsHitRect(player.GetPosX(), player.GetPosY(), PLAYER_SIZE, PLAYER_SIZE,
 				enemy.EnemyPosX[enemyIndex], enemy.EnemyPosY[enemyIndex], ENEMY_SIZE, ENEMY_SIZE))

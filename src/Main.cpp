@@ -34,9 +34,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//一番最初に１回だけやる処理をここに書く
 	
 	//Input関数の初期化
-	InitInput();
-	
-	
+	InitInput();	
 	
 	//クラス宣言
 	Play play;			//プレイシーン
