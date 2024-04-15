@@ -28,6 +28,10 @@ void Play::Init()
 
 	Bullet_SE = -1;
 	Bgm = -1;
+
+	//制限時間
+	PlayFinCnt = 30;
+	PlayFinFreamCntNum = 0;
 }
 
 //読み込み処理
@@ -74,6 +78,14 @@ void Play::Step()
 
 	//敵関連
 	enemy.Step();
+
+	//制限時間をカウント
+	PlayFinFreamCntNum++;
+	if (PlayFinFreamCntNum >=60)
+	{
+		PlayFinCnt -= 1;
+		PlayFinFreamCntNum = 0;
+	}
 }
 
 //描画処理
@@ -98,6 +110,9 @@ void Play::Draw()
 
 	//デバッグ
 	DrawFormatString(32, 100, GetColor(255, 0, 0), "%f", PlayerFramCnt);
+
+	//制限時間描画
+	DrawFormatString(0, 0, GetColor(255, 0, 0), "残り時間:%d", PlayFinCnt);
 }
 
 //終了処理

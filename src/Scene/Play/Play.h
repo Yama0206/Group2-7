@@ -27,6 +27,8 @@ private:
 
 	//制限時間カウント
 	int PlayFinFreamCnt;
+	int PlayFinFreamCntNum;
+	int PlayFinCnt;
 
 	//サウンド
 	int Bullet_SE;

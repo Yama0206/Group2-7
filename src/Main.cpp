@@ -5,6 +5,7 @@
 #include "Scene/Play/Play.h"
 #include "Player/Player.h"
 #include "Fps/Fps.h"
+#include "Scene/Clear/Clear.h"
 
 // define
 #define	SCREEN_SIZE_X	640	// X方向の画面サイズを指定
@@ -38,6 +39,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	
 	//クラス宣言
 	Play play;			//プレイシーン
+	Clear clear;
 
 	//-----------------------------------------
 
@@ -97,10 +99,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 
 		case SCENE_ID_INIT_RESULT:
-
+			clear.InitClear();
 			break;
 		case SCENE_ID_LOOP_RESULT:
-
+			clear.StepClear();
+			clear.DrawClear();
 			break;
 		case SCENE_ID_FIN_RESULT:
 
