@@ -207,6 +207,7 @@ void Enemy::Draw()
 				IsAllive[i] = true;
 				respawnCnt = 0;
 			}
+			int respawnCnt;
 		}*/
 	}
 }
