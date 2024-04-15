@@ -21,7 +21,8 @@ void Play::Init()
 	//“GŠÖ˜A
 	enemy.Init();
 
-
+    //”wŒi“Ç‚İ‚İ
+	PlayImageHandle = LoadGraph("data/PlayImage/BackGround.png");
 }
 
 //“Ç‚İ‚İˆ—
@@ -61,6 +62,9 @@ void Play::Step()
 //•`‰æˆ—
 void Play::Draw()
 {
+	//”wŒi•`‰æ
+	DrawRotaGraph(320, 240, 1.0f, 0.0f, PlayImageHandle, true);
+
 	//ƒvƒŒƒCƒ„[ŠÖ˜A
 	player.Draw();	
 	for (int i = 0; i < BULLET_MAX_NUM; i++) {			//’e‚Ì”•¶for•¶‚ğ‰ñ‚·
@@ -74,6 +78,7 @@ void Play::Draw()
 
 	//“GŠÖ˜A
 	enemy.Draw();
+
 	//ƒfƒoƒbƒO
 	DrawFormatString(32, 100, GetColor(255, 0, 0), "%f", PlayerFramCnt);
 }

@@ -21,6 +21,7 @@ private:
 	//マウス関連(試しに)
 	int MousePosX, MousePosY;	//マウスの座標
 
+	int PlayImageHandle;
 public:
 	//初期化
 	void Init();
