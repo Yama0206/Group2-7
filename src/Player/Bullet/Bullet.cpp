@@ -96,6 +96,13 @@ void Bullet::Move(float x, float y)
 	}
 }
 
+//’e‚ÌÀ•W‚ğİ’è
+void Bullet::SetPos(float x, float y)
+{
+	PosX = x;
+	PosY = y;
+}
+
 void Bullet::SetIsUse(bool flag)
 {
 	

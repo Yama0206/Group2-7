@@ -39,11 +39,17 @@ void Play::Step()
 {
 	//プレイヤー関連
 	player.Step();
-	//プレイヤーのフレームをカウント
-	player.FramCnt(&PlayerFramCnt);
 
 	//発射処理
 	BulletShot();
+
+	//当たり判定
+	EnemyToBulletCollision();
+
+	//敵とプレイヤーの当たり判定
+	EnemyToPlayer();
+	
+	PlayerIsInv();
 
 	//敵関連
 	enemy.Step();
@@ -61,6 +67,7 @@ void Play::Draw()
 		}
 	}
 	
+	DrawFormatString(32, 128, GetColor(255, 0, 0), "%d", player.GetHP());
 
 	//敵関連
 	enemy.Draw();
@@ -109,12 +116,16 @@ void Play::BulletShot()
 
 				//発射したら弾の使用フラグをオンにする
 				bullet[bulletIndex].SetIsUse(true);
+
+				//弾の発射位置をプレイヤーの座標に設定
+				bullet[bulletIndex].SetPos(player.GetPosX(), player.GetPosY());
 			}
 		}
 		
 		//弾が使われているかどうか
 		if (bullet[bulletIndex].GetIsUse())
 		{
+
 			//マウスの座標を保存
 			bullet[bulletIndex].SetMousePos((float)MousePosX, (float)MousePosY);
 
@@ -123,5 +134,63 @@ void Play::BulletShot()
 		}
 
 		
+	}
+}
+
+//敵と弾の当たり判定
+void Play::EnemyToBulletCollision()
+{
+	//敵の数分for文を回す
+	for (int enemyIndex = 0; enemyIndex < ENEMY_MAX_NUM; enemyIndex++) {
+		//弾の数分をfor文を回す
+		for (int bulletIndex = 0; bulletIndex < BULLET_MAX_NUM; bulletIndex++) {
+			//当たった時
+			if (IsHitRect(bullet[bulletIndex].GetPosX(), bullet[bulletIndex].GetPosY(), BULLET_SIZE, BULLET_SIZE,
+				enemy.EnemyPosX[enemyIndex], enemy.EnemyPosY[enemyIndex], ENEMY_SIZE, ENEMY_SIZE))
+			{
+				enemy.IsAllive[enemyIndex] = false;
+			}
+		}
+	}
+}
+
+//敵とプレイヤーの当たり判定
+void Play::EnemyToPlayer()
+{
+	//敵の数分for文を回す
+	for (int enemyIndex = 0; enemyIndex < ENEMY_MAX_NUM; enemyIndex++)
+	{
+		if (!player.GetIsInv()) {
+			//敵とプレイヤーが当たった時
+			if (IsHitRect(player.GetPosX(), player.GetPosY(), PLAYER_SIZE, PLAYER_SIZE,
+				enemy.EnemyPosX[enemyIndex], enemy.EnemyPosY[enemyIndex], ENEMY_SIZE, ENEMY_SIZE))
+			{
+				player.SetIsInv(true);
+				//プレイヤーのHPを減らす
+				player.SetHP(-1);
+
+				//HPがゼロになった時
+				if (player.GetHP() == 0)
+				{
+					player.SetIsAllive(false);
+				}
+			}
+		}
+	}
+}
+
+void Play::PlayerIsInv()
+{
+	if (player.GetIsInv())
+	{
+		//プレイヤーのフレームをカウント
+		player.FramCnt(&PlayerFramCnt);
+
+		if (PlayerFramCnt == 120)
+		{
+			player.SetIsInv(false);
+
+			PlayerFramCnt = 0;
+		}
 	}
 }

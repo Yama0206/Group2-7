@@ -4,6 +4,7 @@
 #include "../Input/Input.h"
 
 const char PLAYER_PATH[] = { "data/Player/PlayerImage.png" };
+const float PLAYER_SIZE = 32.0f;
 
 //プレイヤークラス
 class Player
@@ -12,7 +13,9 @@ private:
 	float PosX, PosY;			//座標
 	float Speed;				//速さ
 	int ImageHandle;			//画像ハンドル
+	int HP;						//体力
 
+	bool IsInv;					//無敵フラグ
 	bool IsAllive;				//生きているかどうか
 public:
 	//初期化
@@ -39,6 +42,21 @@ public:
 	//プレイヤーの座標取得
 	float GetPosX() { return PosX; }		//X座標
 	float GetPosY() { return PosY; }		//Y座標
+
+	//生きているかどうかの設定
+	void SetIsAllive(bool Isflag) { IsAllive = Isflag; }
+	//生きているかどうかの取得
+	bool GetIsAllive() { return IsAllive; }
+
+	//無敵フラグのセット
+	void SetIsInv(bool IsFlag) { IsInv = IsFlag; }
+	//無敵フラグを取得
+	bool GetIsInv() { return IsInv; }
+
+	//HPの値の変更
+	void SetHP(int hp) { HP += hp; }
+	//HP取得
+	int GetHP() { return HP; }
 
 	//プレイヤーの座標取得
 	void FramCnt(float* framcnt);

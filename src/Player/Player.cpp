@@ -9,7 +9,10 @@ void Player::Init()
 
 	Speed = 0.0f;
 
-	IsAllive = false;
+	HP = 0;
+
+	IsAllive = true;
+	IsInv = false;
 
 	//画像ハンドル
 	ImageHandle = -1;
@@ -19,8 +22,10 @@ void Player::Init()
 void Player::InitValue()
 {
 	//座標設定
-	PosX = 0.0f;
-	PosY = 0.0f;
+	PosX = 320.0f;
+	PosY = 240.0f;
+
+	HP = 3;
 
 	//速さ
 	Speed = 2.0f;
@@ -46,8 +51,9 @@ void Player::Draw()
 		//デバッグ用
 		DrawFormatString(32, 32, GetColor(255, 0, 0), "押された");
 	}
-
-	DrawRotaGraph(PosX, PosY, 1.0f, 0.0f, ImageHandle, true, false);
+	if (IsAllive) {
+		DrawRotaGraph(PosX, PosY, 1.0f, 0.0f, ImageHandle, true, false);
+	}
 }
 
 //終了処理
