@@ -21,6 +21,7 @@ private:
 	//座標が変更されるまでのカウント
 	int PosChangeCnt[ENEMY_MAX_NUM];
 
+	int respawnCnt;
 public:
 	//座標
 	float EnemyPosX[ENEMY_MAX_NUM], EnemyPosY[ENEMY_MAX_NUM];

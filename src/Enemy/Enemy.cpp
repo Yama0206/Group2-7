@@ -2,7 +2,7 @@
 
 void Enemy::Init()
 {
-	
+
 	for (int i = 0; i < ENEMY_MAX_NUM; i++)
 	{
 		//生存フラグ
@@ -15,16 +15,14 @@ void Enemy::Init()
 		IsAllive[i] = true;
 	}
 
-	
-
 	PosChangeCnt[1] = 0;
-	
+
 	//座標初期位置
 	EnemyPosX[0] = 16;
 	EnemyPosY[0] = 16;
 
-	EnemyPosX[1] = GetRand(640-16);
-	EnemyPosY[1] = GetRand(480-16);
+	EnemyPosX[1] = GetRand(640 - 16);
+	EnemyPosY[1] = GetRand(480 - 16);
 
 	/*EnemyPosX[2] = 640 / 2;
 	EnemyPosY[2] = 16;*/
@@ -35,9 +33,10 @@ void Enemy::Init()
 	EnemyPosX[3] = GetRand(640 - 16);
 	EnemyPosY[3] = 16;
 
-	EnemyPosX[4]= 640 - 16;
-	EnemyPosY[4]= 480 - 16;
+	EnemyPosX[4] = 640 - 16;
+	EnemyPosY[4] = 480 - 16;
 
+	
 }
 
 void Enemy::Load()
@@ -200,9 +199,14 @@ void Enemy::Draw()
 			DrawRotaGraph(EnemyPosX[i] += EnemyMoveNumX[i], EnemyPosY[i] += EnemyMoveNumY[i], 1.0f, 0.0f, EnemyImageHandle[i], true);
 		}
 
-		if (!IsAllive[i])
+		/*if (!IsAllive[i])
 		{
-			
-		}
+			respawnCnt++;
+			if (respawnCnt >= 100)
+			{
+				IsAllive[i] = true;
+				respawnCnt = 0;
+			}
+		}*/
 	}
 }
