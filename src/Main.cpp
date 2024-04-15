@@ -108,6 +108,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			clear.FinClear();
 			break;
 
+
 		case SCENE_ID_INIT_GAMEOVER:
 			gameover.InitGameOver();
 			break;

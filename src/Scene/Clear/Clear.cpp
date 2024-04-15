@@ -13,7 +13,7 @@ void Clear::InitClear()
 	ClearHndl = LoadGraph("data/clearImage/gameclearimage.png");
 	Clear_Bgm = LoadSoundMem(CLEAR_BGM);
 
-	PlaySoundMem(Clear_Bgm, DX_PLAYTYPE_LOOP);
+	PlaySoundMem(Clear_Bgm, DX_PLAYTYPE_BACK);
 
 	g_CurrentSceneID = SCENE_ID_LOOP_CLEAR;
 }
