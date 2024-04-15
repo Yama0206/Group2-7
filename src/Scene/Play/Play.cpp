@@ -32,6 +32,8 @@ void Play::Init()
 	//制限時間
 	PlayFinCnt = 30;
 	PlayFinFreamCntNum = 0;
+
+	g_CurrentSceneID = SCENE_ID_LOOP_PLAY;
 }
 
 //読み込み処理
@@ -86,6 +88,12 @@ void Play::Step()
 		PlayFinCnt -= 1;
 		PlayFinFreamCntNum = 0;
 	}
+
+	if (PlayFinCnt <= 0)
+	{
+		//終了処理
+		Fin();
+	}
 }
 
 //描画処理
@@ -118,7 +126,18 @@ void Play::Draw()
 //終了処理
 void Play::Fin()
 {
+	//サウンドを削除
+	DeleteSoundMem(Bgm);
+	DeleteSoundMem(Bullet_SE);
 
+	if (player.GetHP() <= 0)
+	{
+		g_CurrentSceneID = SCENE_ID_INIT_GAMEOVER;
+	}
+
+	else {
+		g_CurrentSceneID = SCENE_ID_INIT_CLEAR;
+	}
 }
 
 
@@ -219,9 +238,21 @@ void Play::PlayerIsInv()
 		//プレイヤーのフレームをカウント
 		player.FramCnt(&PlayerFramCnt);
 
+		if (PlayerFramCnt <= 120)
+		{
+			if ((int)PlayerFramCnt % 12 >= 6)
+			{
+				player.SetIsDraw(false);
+			}
+			else {
+				player.SetIsDraw(true);
+			}
+		}
 		if (PlayerFramCnt == 120)
 		{
 			player.SetIsInv(false);
+
+
 
 			PlayerFramCnt = 0;
 		}

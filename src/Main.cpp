@@ -2,6 +2,8 @@
 
 #include "DxLib.h"	//DXライブラリのインクルード
 #include "Scene/Scene.h"
+#include "Scene/Title/Title.h"
+#include "Scene/GameOver/GameOver.h"
 #include "Scene/Play/Play.h"
 #include "Player/Player.h"
 #include "Fps/Fps.h"
@@ -39,7 +41,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	
 	//クラス宣言
 	Play play;			//プレイシーン
-	Clear clear;
+	Title title;		//タイトル
+	GameOver gameover;	//ゲームオーバー
+	Clear clear;		//クリアシーン
 
 	//-----------------------------------------
 
@@ -69,45 +73,50 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		switch (g_CurrentSceneID)
 		{
 		case SCENE_ID_INIT_TITLE:
-
-			g_CurrentSceneID = SCENE_ID_INIT_PLAY;
+			title.InitTitle();
 			break;
 		case SCENE_ID_LOOP_TITLE:
-
+			title.StepTitle();
+			title.DrawTitle();
 			break;
 		case SCENE_ID_FIN_TITLE:
-
+			title.FinTitle();
 			break;
 
 
 		case SCENE_ID_INIT_PLAY:
-			
 			play.Init();		//初期化処理
 			play.Load();		//読み込み処理
-
-			g_CurrentSceneID = SCENE_ID_LOOP_PLAY;
 			break;
 		case SCENE_ID_LOOP_PLAY:
-
 			play.Step();		//通常処理
 			play.Draw();		//描画処理
-
 			break;
 		case SCENE_ID_FIN_PLAY:
-
+			play.Fin();
 			break;
 
 
-		case SCENE_ID_INIT_RESULT:
+		case SCENE_ID_INIT_CLEAR:
 			clear.InitClear();
 			break;
-		case SCENE_ID_LOOP_RESULT:
+		case SCENE_ID_LOOP_CLEAR:
 			clear.StepClear();
 			clear.DrawClear();
 			break;
-		case SCENE_ID_FIN_RESULT:
-
+		case SCENE_ID_FIN_CLEAR:
+			clear.FinClear();
 			break;
+
+		case SCENE_ID_INIT_GAMEOVER:
+			gameover.InitGameOver();
+			break;
+		case SCENE_ID_LOOP_GAMEOVER:
+			gameover.StepGameOver();
+			gameover.DrawGameOver();
+			break;
+		case SCENE_ID_FIN_GAMEOVER:
+			gameover.FinGameOver();
 		}
 
 		// FPS初期化処理

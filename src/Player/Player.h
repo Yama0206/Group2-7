@@ -18,6 +18,7 @@ private:
 	bool IsInv;					//無敵フラグ
 	bool IsStartInv;			//スタートしてからの無敵フラグ
 	bool IsAllive;				//生きているかどうか
+	bool IsDraw;
 public:
 	//初期化
 	void Init();
@@ -48,6 +49,11 @@ public:
 	void SetIsAllive(bool Isflag) { IsAllive = Isflag; }
 	//生きているかどうかの取得
 	bool GetIsAllive() { return IsAllive; }
+
+	//描画するかどうか
+	void SetIsDraw(bool Isflag) { IsDraw = Isflag; }
+	//描画するかどうかの取得
+	bool GetIsDraw() { return IsDraw; }
 
 	//無敵フラグのセット
 	void SetIsInv(bool IsFlag) { IsInv = IsFlag; }

@@ -1,11 +1,15 @@
 #pragma once
 
+const char GAMEOVER_BGM[] = { "data/Sound/zannense.mp3" };
+
 class GameOver
 {
 
 protected:
 
 	int GameOverHndl;
+
+	int GameOverBgm;
 
 public:
 

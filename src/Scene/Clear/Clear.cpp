@@ -1,6 +1,7 @@
 #include "DxLib.h"
 #include "Clear.h"
 #include "../Scene.h"
+#include "../../Input/Input.h"
 
 void Clear::DebugClear()
 {
@@ -10,15 +11,18 @@ void Clear::DebugClear()
 void Clear::InitClear()
 {
 	ClearHndl = LoadGraph("data/clearImage/gameclearimage.png");
+	Clear_Bgm = LoadSoundMem(CLEAR_BGM);
 
-	g_CurrentSceneID = SCENE_ID_LOOP_RESULT;
+	PlaySoundMem(Clear_Bgm, DX_PLAYTYPE_LOOP);
+
+	g_CurrentSceneID = SCENE_ID_LOOP_CLEAR;
 }
 
 void Clear::StepClear()
 {
-	if (CheckHitKey(KEY_INPUT_SPACE))
+	if (IsKeyPush(KEY_INPUT_SPACE))
 	{
-		g_CurrentSceneID = SCENE_ID_FIN_RESULT;
+		g_CurrentSceneID = SCENE_ID_FIN_CLEAR;
 	}
 }
 
@@ -26,6 +30,7 @@ void Clear::FinClear()
 {
 	g_CurrentSceneID = SCENE_ID_INIT_TITLE;
 
+	DeleteSoundMem(Clear_Bgm);
 	DeleteGraph(ClearHndl);
 }
 

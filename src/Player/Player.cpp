@@ -14,6 +14,7 @@ void Player::Init()
 	IsAllive = true;
 	IsInv = false;
 	IsStartInv = true;
+	IsDraw = true;
 
 	//画像ハンドル
 	ImageHandle = -1;
@@ -48,11 +49,7 @@ void Player::Step()
 //描画処理
 void Player::Draw()
 {
-	if (IsShot()) {
-		//デバッグ用
-		DrawFormatString(32, 32, GetColor(255, 0, 0), "押された");
-	}
-	if (IsAllive) {
+	if (IsAllive && IsDraw) {
 		DrawRotaGraph(PosX, PosY, 1.0f, 0.0f, ImageHandle, true, false);
 	}
 }
@@ -60,7 +57,7 @@ void Player::Draw()
 //終了処理
 void Player::Fin()
 {
-	
+
 }
 
 //プレイヤーの操作関連

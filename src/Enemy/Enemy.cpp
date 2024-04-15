@@ -199,16 +199,6 @@ void Enemy::Draw()
 		if (IsAllive[i]) {
 			DrawRotaGraph(EnemyPosX[i] += EnemyMoveNumX[i], EnemyPosY[i] += EnemyMoveNumY[i], 1.0f, 0.0f, EnemyImageHandle[i], true);
 		}
-
-		//if (!IsAllive[i])
-		//{
-		//	respawnCnt++;
-		//	if (respawnCnt >= 100)
-		//	{
-		//		IsAllive[i] = true;
-		//		respawnCnt = 0;
-		//	}
-		//}
 	}
 }
 

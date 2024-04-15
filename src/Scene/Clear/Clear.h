@@ -1,11 +1,14 @@
 #pragma once
 
+const char CLEAR_BGM[] = { "data/Sound/GameClearBGM1.m4a" };
+
 class Clear
 {
 
 protected:
 
 	int ClearHndl;
+	int Clear_Bgm;
 
 public:
 

@@ -1,11 +1,14 @@
 #pragma once
 
+const char TITLE_BGM[] = { "data/Sound/HipHop_01.mp3" };
+
 class Title
 {
 
 protected :
 
 	int TitleHndl;
+	int Title_Bgm;
 
 public:
 
