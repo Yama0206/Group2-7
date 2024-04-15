@@ -61,6 +61,7 @@ public:
 
 	//HP‚Ì’l‚Ì•ÏX
 	void SetHP(int hp) { HP += hp; }
+	
 	//HPæ“¾
 	int GetHP() { return HP; }
 

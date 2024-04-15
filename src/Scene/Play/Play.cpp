@@ -188,6 +188,8 @@ void Play::EnemyToPlayer()
 					if (player.GetHP() == 0)
 					{
 						player.SetIsAllive(false);
+
+						Fin();
 					}
 				}
 			}
