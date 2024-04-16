@@ -111,13 +111,10 @@ void Play::Draw()
 		}
 	}
 	
-	DrawFormatString(32, 128, GetColor(255, 0, 0), "%d", player.GetHP());
+	DrawFormatString(32, 128, GetColor(255, 0, 0), "HP：%d", player.GetHP());
 
 	//敵関連
 	enemy.Draw();
-
-	//デバッグ
-	DrawFormatString(32, 100, GetColor(255, 0, 0), "%f", PlayerFramCnt);
 
 	//制限時間描画
 	DrawFormatString(0, 0, GetColor(255, 0, 0), "残り時間:%d", PlayFinCnt);
